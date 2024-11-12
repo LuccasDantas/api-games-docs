@@ -60,7 +60,9 @@ Indica que não foi encontrado nenhum jogo com o id informado.
 Esse endpoint permite cadastrar um novo jogo no banco de dados.
 #### Parâmetros
 title: Título do jogo
+
 price: Preço do jogo
+
 year: Ano de lançamento do jogo
 
 #### Respostas
@@ -94,6 +96,8 @@ Exemplo:
 #### Respostas
 
 ##### Falha Interna! 400
+
+###### Descrição:
 Caso essa resposta aconteça, isso significa que ocorreu uma falha interna durante o processo de autenticação. Motivos podem ser problemas na conexão com o servidor (como erro de porta) ou falhas no processamento da requisição pelo servidor. É importante verificar a estabilidade da conexão e, se o problema persistir, investigar a causa raiz.
 
 Exemplo de resposta:
@@ -103,6 +107,10 @@ Exemplo de resposta:
 
 ##### OK! 200
 
+###### Descrição:
+Indica que o login foi realizado com sucesso.
+
+
 Exemplo de resposta:
 
 ```
@@ -111,6 +119,8 @@ Exemplo de resposta:
 ```
 
 ##### Falha na autenticação! 401
+
+###### Descrição:
 Caso essa resposta aconteça, isso significa que aconteceu alguma falha durante o processo de autenticação da requisição. Motivos: Token inválido, Token expirado!
 
 Exemplos de resposta:
@@ -120,6 +130,8 @@ Exemplos de resposta:
 ```
 
 ##### Email não encontrado ou Email inválido! 404 ou 400
+
+###### Descrição:
 Caso a autenticação falhe, a API retornará um erro com o código 404 ou 400, dependendo do motivo. A resposta conterá uma mensagem de erro informando que o e-mail enviado não existe na base de dados ou é inválido
 
 Exemplos de resposta:
@@ -135,9 +147,89 @@ Exemplos de resposta:
 ```
 ##
 ### DELETE /games/:id
+Esse endpoint permite excluir um jogo do banco de dados, com base no ID do jogo.
 
+#### Parâmetros
+id: ID do jogo a ser excluído
 
+#### Respostas
 
+##### Bad Request! 400
+
+###### Descrição:
+Caso essa resposta aconteça, isso significa que o id fornecido é inválido (diferente de um número).
+
+Exemplo de resposta:
+
+```
+Bad Request
+```
+
+##### Not Found! 404
+
+###### Descrição:
+Caso essa resposta aconteça, isso significa que jogo fornecido pela a id não foi encontrado no banco de dados. Motivos: Jogo já tiver sido deletado anteriormente ou se o id informado estiver errado.
+
+Exemplo de resposta:
+
+```
+Not Found
+```
+
+##### OK! 200
+
+###### Descrição:
+Caso essa resposta aconteça, indica que o jogo foi excluído com sucesso.
+
+Exemplo de resposta:
+
+```
+OK
+```
 
 ##
 ### PUT /games/:id
+Esse endpoint permite atualizar as informações de um jogo existente, com base no seu ID.
+
+#### Parâmetros
+id: ID do jogo a ser atualizado
+
+title: Novo título do jogo
+
+price: Novo preço do jogo
+
+year: Novo ano de lançamento do jogo
+
+#### Respostas
+
+##### Bad Request! 400
+
+###### Descrição:
+Caso essa resposta aconteça, isso significa que o id fornecido é inválido (diferente de um número).
+
+Exemplo de resposta:
+
+```
+Bad Request
+```
+
+##### OK! 200
+
+###### Descrição:
+Caso essa resposta aconteça, indica que o jogo foi alterado com sucesso.
+
+Exemplo de resposta:
+
+```
+OK
+```
+##### Not Found! 404
+
+###### Descrição:
+Caso essa resposta aconteça, isso significa que jogo fornecido pela a id não foi encontrado no banco de dados.
+
+Exemplo de resposta:
+
+```
+Not Found
+```
